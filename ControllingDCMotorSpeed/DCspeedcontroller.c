@@ -31,7 +31,7 @@ void setup(){
 
 }
 void updatespeed(uint8 ocr_value){
-	speed = (float)((float)ocr_value/255)*100;
+	speed = ((float)ocr_value/255)*100;
 }
 void displayMotorSpeed(){
 	uint8 lcdspeed[2];
@@ -53,8 +53,8 @@ void loop(){
 	advalue = Adc_StartConversion(Adc_channel2);
 	advalue =(advalue)/4 ;
 	PWM_setOCR0(advalue);
-updatespeed(OCR0);
-displayMotorSpeed();
+	updatespeed(OCR0);
+	displayMotorSpeed();
 
 	/* check if the first switch is pressed (Rotate clock wise) */
 			if(PINB & (1<<PB0))
