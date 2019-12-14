@@ -1,0 +1,1 @@
+Controlling Dc motor speed using pot and 3 buttons to control MOTOR rotation State 
