@@ -29,7 +29,6 @@ ISR(INT0_vect) {
 		OCR0 = 0 ;
 	}
 	OCR0 += 1;
-	PORTA = 0xFF ;
 }
 ISR(INT1_vect) {
 	if (OCR0!=0){
