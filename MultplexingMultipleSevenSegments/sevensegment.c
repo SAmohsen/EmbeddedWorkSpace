@@ -19,17 +19,32 @@ void sevensegment_Init() {
 	SET_BIT(SEVEN_SEGMENT_ENABLE_PORT, SEVENSEGMENT1_ENABLE);
 	SET_BIT(SEVEN_SEGMENT_ENABLE_PORT, SEVENSEGMENT2_ENABLE);
 }
-void sevensegment_BCDupdate(uint8 value) {
-	uint8_t temp;
-	temp = value % 10;
-	SET_BIT(SEVEN_SEGMENT_ENABLE_PORT, SEVENSEGMENT1_ENABLE);
-	CLR_BIT(SEVEN_SEGMENT_ENABLE_PORT, SEVENSEGMENT2_ENABLE);
-	SEVEN_SEGMENT_PORT = temp;
-	_delay_ms(1);
-	temp = value / 10;
-	CLR_BIT(SEVEN_SEGMENT_ENABLE_PORT, SEVENSEGMENT1_ENABLE);
-	SET_BIT(SEVEN_SEGMENT_ENABLE_PORT, SEVENSEGMENT2_ENABLE);
-	SEVEN_SEGMENT_PORT = temp;
-	_delay_ms(1);
+void TwoSevensegments_BCDupdate(uint8 value) {
+	uint8_t ones;
+	uint8_t tens;
+	if (value > 99) {
+		ones = 0;
+		tens = 0;
+	} else {
+		ones = value % 10;
+		tens = value / 10;
+	}
+
+#ifdef HIGH_NIBBLE
+	SEVEN_SEGMENT_ENABLE_PORT =(SEVEN_SEGMENT_ENABLE_PORT & 0xC0) | 0x02;
+	SEVEN_SEGMENT_PORT = (SEVEN_SEGMENT_PORT &0x0F) | (ones<<4);
+	_delay_us(500);
+	SEVEN_SEGMENT_ENABLE_PORT = (SEVEN_SEGMENT_ENABLE_PORT & 0xC0) | 0x01;
+	SEVEN_SEGMENT_PORT = (SEVEN_SEGMENT_PORT &0x0F) | (tens<<4);
+	_delay_us(500);
+#else
+	SEVEN_SEGMENT_ENABLE_PORT = (SEVEN_SEGMENT_ENABLE_PORT & 0xC0) | 0x02;
+	SEVEN_SEGMENT_PORT = (SEVEN_SEGMENT_PORT & 0xF0) | (ones);
+	_delay_us(500);
+	SEVEN_SEGMENT_ENABLE_PORT = (SEVEN_SEGMENT_ENABLE_PORT & 0xC0) | 0x01;
+	SEVEN_SEGMENT_PORT = (SEVEN_SEGMENT_PORT & 0xF0) | (tens);
+	_delay_us(500);
+
+#endif
 
 }
