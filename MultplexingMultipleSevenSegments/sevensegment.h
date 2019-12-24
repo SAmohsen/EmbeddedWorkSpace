@@ -13,6 +13,6 @@
 #include "common_marcos.h"
 #include "sevensegment_cfg.h"
 void sevensegment_Init() ;
-void sevensegment_BCDupdate(uint8 value);
+void TwoSevensegments_BCDupdate(uint8 value);
 
 #endif /* SEVENSEGMENT_H_ */
