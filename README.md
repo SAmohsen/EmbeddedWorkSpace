@@ -1,2 +1,2 @@
 # EmbeddedCoolStuff
-playing with Atmega16
+Doing Some Cool Stuff 
