@@ -1,2 +1,1 @@
-# EmbeddedCoolStuff
-Doing Some Cool Stuff 
+Atmega 16 projects
