@@ -1,1 +1,0 @@
-Stop watch using 6 seven segments with button to clear the watch
